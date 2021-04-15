@@ -1,0 +1,82 @@
+body{
+	background-color: #a6dff7;
+}
+
+.btn-outline-secondary{
+	border: 0px;
+	color: #000000;
+	text-align: center;
+}
+
+.navbar-light{
+	background-color: #e3f2fd;
+}
+
+.d-flex{
+	position: absolute;
+	left:350px;
+}
+
+.photo_style{
+	position: absolute;
+	top: 110px;
+	left: 50px;
+}
+
+.info{
+	position: absolute;
+	left: 380px;
+	top: -5px;
+}
+
+.text_profile{
+	white-space: nowrap;
+}
+
+form.login_form {
+    max-width: 450px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: #d7f1fc;
+    padding: 10px;
+}
+
+.loginForm{
+	margin-left: 380px;
+	margin-top: -100px
+}
+
+.btns{
+	display: inline-block;
+	position: relative;
+	left: 0px;
+	top: 5px;
+	width: 301px;
+}
+
+.delete{
+	margin-left: 10px;
+}
+
+.writeNew{
+	position: absolute;
+	top: 130px;
+}
+
+.edit_profile{
+	position: absolute;
+	left: 0px;
+	top: 310px;
+	width: 301px;
+}
+
+.reviews_user{
+	position: absolute;
+	top: 150px;
+}
+
+.profile_info{
+	position: absolute;
+	left: 350px;
+	top: -10px;
+}

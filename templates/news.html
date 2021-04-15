@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>News</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/news_style.css') }}"/>
+    </head>
+    <header>
+		<nav class="navbar navbar-expand-lg navbar-light">
+		 	<div class="container-fluid">
+		  		<a class="navbar-brand" href="/news">
+      				<img src="{{ url_for('static', filename='pictures/logo.png') }}" alt="" width="35" height="30" class="d-inline-block align-text-top">
+      				Films
+    			</a>
+				<form class="container-fluid justify-content-start" method="POST">
+					<button class="btn btn-outline-secondary" type="submit" name="header_btn" value="Home">Домой</button>
+					<button class="btn btn-outline-secondary" type="submit" name="header_btn" value="Profile">Профиль</button>
+				</form>
+				<form class="d-flex" method="POST">
+      				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      				<button class="btn btn-outline-dark" type="submit">Найти</button>
+    			</form>
+    			<form method="POST">
+	    			<button type="submit" class="btn btn-outline-secondary" name="header_btn" value="Logout">
+	                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+	 					<path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+	  					<path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+					</svg>
+	              </button>
+          		</form>
+		 	</div>
+		</nav>
+    </header>
+    <body>
+    	<br>
+		{% block content %}
+		{% for item in reviews%}
+		<div class="loginForm">
+			<form class="login_form">
+				<h2>{{item.title}} ({{ item.year }})</h2>
+				<h6>{{item.genres}}</h6>
+				<h5>Оценка: {{item.average_mark}}</h5>
+				<div>
+					Обзор написали {{item.countReviews}} {{ word.make_agree_with_number(item.countReviews).word }}
+				</div>
+			</form>
+		</div>
+		<br>
+		{% endfor %}
+		{% endblock %}
+    </body>
+</html>
