@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect, flash, make_response
 from data import db_session
+from flask_uploads import UploadSet, configure_uploads, IMAGES
 import login_script
 import registration_script
 import main_script
@@ -8,6 +9,9 @@ import profile_script
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'fjgut7gjvhd8794kbhd65h'
+app.config['UPLOADED_PHOTOS_DEST'] = 'static/pictures'
+photos = UploadSet('photos', IMAGES)
+configure_uploads(app, photos)
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -47,7 +51,7 @@ def changeReview(id):
 
 @app.route('/profile', methods=['POST', 'GET'])
 def profileEnter():
-    return profile_script.main(request.method)
+    return profile_script.main(request.method, photos)
 
 
 if __name__ == '__main__':

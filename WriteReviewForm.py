@@ -1,15 +1,7 @@
 from flask import Flask, render_template, request, url_for, flash, redirect, make_response, app
 from data import db_session
 from data import __all_models
-
-
-def header_logic():
-    if request.form['header_btn'] == 'Home':
-        return redirect('/news')
-    if request.form['header_btn'] == 'Profile':
-        return redirect('/profile')
-    if request.form['header_btn'] == 'Logout':
-        return redirect('/login')
+from header import header_logic, search_logic
 
 
 def writeNewReview(method):
@@ -19,6 +11,8 @@ def writeNewReview(method):
     else:
         if 'header_btn' in request.form:
             return header_logic()
+        elif 'submit_btn' in request.form:
+            return search_logic()
         else:
             user_id = request.cookies.get('id')
             db_sess = db_session.create_session()

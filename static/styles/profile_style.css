@@ -43,7 +43,7 @@ form.login_form {
 
 .loginForm{
 	margin-left: 380px;
-	margin-top: -100px
+	margin-top: -110px
 }
 
 .btns{
@@ -63,13 +63,6 @@ form.login_form {
 	top: 130px;
 }
 
-.edit_profile{
-	position: absolute;
-	left: 0px;
-	top: 310px;
-	width: 301px;
-}
-
 .reviews_user{
 	position: absolute;
 	top: 150px;
@@ -79,4 +72,81 @@ form.login_form {
 	position: absolute;
 	left: 350px;
 	top: -10px;
+}
+
+.label_file{
+	margin-top: 10px;
+	width: 301px;
+    height: 50px;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    transition: all 0.18s ease-in-out;
+}
+
+.input__wrapper {
+	left: -273px;
+	width: 100%;
+	position: absolute;
+	margin-top: 15px;
+	text-align: center;
+}
+ 
+.input__file {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+ 
+.input__file-icon-wrapper {
+    height: 60px;
+    width: 60px;
+    margin-right: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    border-right: 1px solid #fff;
+}
+ 
+.input__file-button-text {
+    line-height: 1;
+    margin-top: 1px;
+}
+ 
+.input__file-button {
+    width: 100%;
+    max-width: 200px;
+    height: 60px;
+    border-right: 1px solid #0d6efd;
+    background: #0d6efd;
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 350;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 272px;
+}
+
+.confirm_new_photo{
+	position: absolute;
+	left: 480px;
+	top: 0px;
+	width: 94px;
+	height: 60px;
 }

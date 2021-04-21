@@ -21,12 +21,12 @@
                 <br>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Электронная почта</label>
-                    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" value="{{ email_value }}">
+                    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" value="{{ email_value }}" required>
                     <div id="emailHelp" class="form-text">Ваша почта не будет передана третим лицам.</div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                    <input type="password" class="form-control" name="password" value="{{ password_value }}">
+                    <input type="password" class="form-control" name="password" value="{{ password_value }}" required>
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="checklogin" name="remember_data" checked="{{ check_value }}">

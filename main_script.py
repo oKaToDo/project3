@@ -2,15 +2,7 @@ from flask import Flask, render_template, request, url_for, flash, redirect, mak
 from data import db_session
 from data import __all_models
 import pymorphy2
-
-
-def header_logic():
-    if request.form['header_btn'] == 'Home':
-        return redirect('/news')
-    if request.form['header_btn'] == 'Profile':
-        return redirect('/profile')
-    if request.form['header_btn'] == 'Logout':
-        return redirect('/login')
+from header import header_logic, search_logic
 
 
 def news(method):
@@ -18,23 +10,33 @@ def news(method):
     db_sess = db_session.create_session()
     user_id = request.cookies.get('id')
     if method == 'GET':
+        reviews__ = []
         reviews_ = db_sess.query(__all_models.Films).all()
+        for i in reviews_:
+            reviews__.append([i.title, i.average_mark, i.genres, i.year, i.countReviews])
         word = morph.parse('Человек')[0]
-        return render_template('news.html', reviews=reviews_, word=word)
+        return render_template('news.html', reviews=reviews__, word=word)
     else:
         if 'header_btn' in request.form:
             return header_logic()
+        elif 'submit_btn' in request.form:
+            return search_logic()
 
 
 def reviews_check(method):
     db_sess = db_session.create_session()
     user_id = request.cookies.get('id')
     if method == 'GET':
+        reviews__ = []
         reviews_ = db_sess.query(__all_models.Reviews).filter(__all_models.Reviews.id_user == user_id)
-        return render_template('Reviews_form.html', reviews=reviews_,)
+        for i in reviews_:
+            reviews__.append([i.title, i.average_mark, i.genres, i.year, i.countReviews])
+        return render_template('Reviews_form.html', reviews=reviews__,)
     else:
         if 'header_btn' in request.form:
             return header_logic()
+        elif 'submit_btn' in request.form:
+            return search_logic()
         else:
             if request.form['btn'] == 'change':
                 return redirect('/change_review/<ind:id>')
@@ -79,6 +81,8 @@ def change_review(method, id):
     else:
         if 'header_btn' in request.form:
             return header_logic()
+        elif 'submit_btn' in request.form:
+            return search_logic()
         else:
             title = request.form['movie_title']
             mark = request.form['mark']
