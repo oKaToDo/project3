@@ -1,25 +1,20 @@
 from flask import Flask, render_template, request, url_for, flash, redirect, make_response, app, abort
 from data import db_session
 from data import __all_models
+from flask_uploads import UploadSet, configure_uploads, IMAGES
+from header import header_logic, search_logic
 
 
-def header_logic():
-    if request.form['header_btn'] == 'Home':
-        return redirect('/news')
-    if request.form['header_btn'] == 'Profile':
-        return redirect('/profile')
-    if request.form['header_btn'] == 'Logout':
-        return redirect('/login')
-
-
-def main(method):
+def main(method, photos):
     db_sess = db_session.create_session()
     user_id = request.cookies.get('id')
     user = db_sess.query(__all_models.User).filter(__all_models.User.id == user_id).first()
     if method == 'GET':
         reviews_ = db_sess.query(__all_models.Reviews).filter(__all_models.Reviews.id_user == user_id)
         if user.img is not None:
-            return render_template('profile.html')
+            return render_template('profile.html', image_route=url_for('static', filename=f'pictures/{user.img}'),
+                                   reviews=reviews_,  name=user.name, count_reviews=user.reviews_count,
+                                   reg_data=user.created_date)
         else:
             return render_template('profile.html', image_route=url_for('static', filename='pictures/0.jpg'),
                                    name=user.name, count_reviews=user.reviews_count, reg_data=user.created_date,
@@ -27,9 +22,19 @@ def main(method):
     else:
         if 'header_btn' in request.form:
             return header_logic()
+        elif 'submit_btn' in request.form:
+            return search_logic()
         else:
             if request.form['btn'] == 'write_new_review':
                 return redirect('/writeReview')
+            elif request.form['btn'] == 'edit_photo':
+                img = request.files['file']
+                filename = photos.save(img)
+                user.img = filename
+                db_sess.commit()
+                return redirect('/profile')
+            else:
+                return 'ok'
 
 
 def reviews_check(method):
@@ -41,6 +46,8 @@ def reviews_check(method):
     else:
         if 'header_btn' in request.form:
             return header_logic()
+        elif 'submit_btn' in request.form:
+            return search_logic()
         else:
             if request.form['btn'] == 'change':
                 return redirect('/change_review/<ind:id>')
@@ -87,6 +94,8 @@ def change_review(method, id):
     else:
         if 'header_btn' in request.form:
             return header_logic()
+        elif 'submit_btn' in request.form:
+            return search_logic()
         else:
             title = request.form['movie_title']
             mark = request.form['mark']

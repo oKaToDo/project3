@@ -2,6 +2,10 @@ from flask import Flask, render_template, request, url_for, flash, redirect, mak
 from data import db_session
 from data import __all_models
 import pymorphy2
+import random
+
+morph = pymorphy2.MorphAnalyzer()
+word = morph.parse('Человек')[0]
 
 
 def header_logic():
@@ -13,6 +17,8 @@ def header_logic():
         return redirect('/login')
     if request.form['header_btn'] == 'search':
         return search_logic()
+    if request.form['header_btn'] == 'Generate':
+        return generate_film()
 
 
 def search_logic():
@@ -59,6 +65,15 @@ def search_logic():
 
         return render_template('Reviews_form.html', reviews=films1)
 
-    morph = pymorphy2.MorphAnalyzer()
-    word = morph.parse('Человек')[0]
+    return render_template('news.html', reviews=films1, word=word)
+
+
+def generate_film():
+    db_sess = db_session.create_session()
+    user_id = request.cookies.get('id')
+
+    films = db_sess.query(__all_models.Films).all()
+    films = random.choice(films)
+    films1 = [[films.title, films.average_mark, films.genres, films.year, films.countReviews], []]
+    print(films1)
     return render_template('news.html', reviews=films1, word=word)

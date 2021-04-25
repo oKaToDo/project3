@@ -12,8 +12,7 @@ class User(db_session.SqlAlchemyBase):
     email = sqlalchemy.Column(sqlalchemy.String,
                               index=True, unique=True, nullable=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    created_date = sqlalchemy.Column(sqlalchemy.DateTime,
-                                     default=datetime.datetime.now)
+    created_date = sqlalchemy.Column(sqlalchemy.String)
     remember_form = sqlalchemy.Column(sqlalchemy.BOOLEAN, nullable=True, default=False)
     reviews_count = sqlalchemy.Column(sqlalchemy.Integer, )
     img = sqlalchemy.Column(sqlalchemy.String, nullable=True)
@@ -31,7 +30,7 @@ class Reviews(db_session.SqlAlchemyBase):
     genre = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     year = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     review = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
+    date = sqlalchemy.Column(sqlalchemy.String)
 
 
 class Films(db_session.SqlAlchemyBase):

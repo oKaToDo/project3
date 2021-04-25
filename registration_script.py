@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, flash, redirect, mak
 from data import db_session
 from werkzeug.security import generate_password_hash, check_password_hash
 from data import __all_models
+import datetime
 
 
 def reg(method):
@@ -30,6 +31,9 @@ def reg(method):
             user.email = email
             user.hashed_password = generate_password_hash(password_1)
             user.reviews_count = 0
+            created_date = datetime.datetime.now()
+            created_date = created_date.strftime("%d-%m-%Y")
+            user.created_date = created_date
             db_sess.add(user)
             db_sess.commit()
             resp = make_response(redirect('/login'))

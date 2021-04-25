@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, flash, redirect, mak
 from data import db_session
 from data import __all_models
 from header import header_logic, search_logic
+import datetime
 
 
 def writeNewReview(method):
@@ -39,6 +40,9 @@ def writeNewReview(method):
                 film.genre = genre
                 film.year = year
                 film.review = review
+                created_date = datetime.datetime.now()
+                created_date = created_date.strftime("%d-%m-%Y %H:%M")
+                film.date = created_date
                 db_sess.add(film)
 
                 films = db_sess.query(__all_models.Films).filter(__all_models.Films.title == title).first()

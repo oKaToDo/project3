@@ -18,6 +18,7 @@
 				<form class="container-fluid justify-content-start" method="POST">
 					<button class="btn btn-outline-secondary" type="submit" name="header_btn" value="Home">Домой</button>
 					<button class="btn btn-outline-secondary" type="submit" name="header_btn" value="Profile">Профиль</button>
+					<button class="btn btn-outline-secondary" type="submit" name="header_btn" value="Generate">Сгенерировать фильм</button>
 				</form>
 				<div class="d-flex">
       				<button class="btn btn-outline-dark" type="button" name="header_btn" value="search" data-bs-toggle="modal" data-bs-target="#exampleModal">Найти</button>
@@ -92,17 +93,19 @@
     	<br>
 		{% block content %}
 		{% for item in reviews%}
-		<div class="loginForm">
-			<form class="login_form">
-				<h2>{{item[0]}} ({{ item[3] }})</h2>
-				<h6>{{item[2]}}</h6>
-				<h5>Оценка: {{item[1]}}</h5>
-				<div>
-					Обзор написали {{item[-1]}} {{ word.make_agree_with_number(item[-1]).word }}
-				</div>
-			</form>
-		</div>
-		<br>
+		{% if item != [] %}
+			<div class="loginForm">
+				<form class="login_form">
+					<h2>{{item[0]}} ({{ item[3] }})</h2>
+					<h6>{{item[2]}}</h6>
+					<h5>Оценка: {{item[1]}}</h5>
+					<div>
+						Обзор написали {{item[-1]}} {{ word.make_agree_with_number(item[-1]).word }}
+					</div>
+				</form>
+			</div>
+			<br>
+		{% endif %}
 		{% endfor %}
 		{% endblock %}
     </body>
